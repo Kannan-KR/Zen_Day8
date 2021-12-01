@@ -1,0 +1,140 @@
+1. https://github.com/rvsp/typescript-oops/blob/master/Practice/Movie.md
+
+class Movie {
+  // a) Write a constructor for the class Movie, which takes a String representing the title of the movie, a String representing the studio, and a String representing the rating as its arguments, and sets the respective class properties to these values.
+  // b) The constructor for the class Movie will set the class property rating to "PG" as default when no rating is provided.
+  constructor(title, studio, rating = "PG") {
+    this.title = title;
+    this.studio = studio;
+    this.rating = rating;
+  }
+
+  // c) Write a method getPG, which takes an array of base type Movie as its argument, and returns a new array of only those movies in the input array with a rating of "PG". You may assume the input array is full of Movie instances. The returned array need not be full.
+  static getPG(movies) {
+    return movies.filter((movie) => movie.rating === "PG");
+  }
+}
+
+// d) Write a piece of code that creates an instance of the class Movie with the title “Casino Royale”, the studio “Eon Productions”, and the rating “PG­13”
+let movie1 = new Movie("Casino Royale", "Eon Productions", "PG13");
+
+let movie2 = new Movie("Movie2", "ABC Productions");
+let movie3 = new Movie("Movie3", "GTD Productions", "R");
+let movie44 = new Movie("Movie44", "RR", "PG");
+
+let movieAll = [movie1, movie2, movie3, movie44];
+console.log(Movie.getPG(movieAll));
+
+
+//output:
+[
+  Movie { title: 'Movie2', studio: 'ABC Productions', rating: 'PG' },
+  Movie { title: 'Movie44', studio: 'RR', rating: 'PG' }
+]
+---------------------------------------------------------------------
+
+2. https://github.com/rvsp/typescript-oops/blob/master/Practice/class-circle.md
+
+class Circle {
+  constructor(radius, color) {
+    this.radius = radius;
+    this.color = color;
+  }
+
+  get radiusCircle() {
+    return this.radius;
+  }
+
+  set radiusCircle(radius) {
+    this.radius = radius;
+  }
+
+  get colorofCircle() {
+    return this.color;
+  }
+
+  set colorofCircle(color) {
+    this.color = color;
+  }
+
+  get toString() {
+    return `"Circle[radius=${this.radius},color=${this.color}]"`;
+  }
+
+  get areaCircle() {
+    return (Math.PI * this.radius * this.radius).toFixed(2);
+  }
+
+  get circumferenceCircle() {
+    return (2 * Math.PI * this.radius).toFixed(2);
+  }
+}
+
+let obj1 = new Circle(1.0, "red");
+console.log(obj1.radiusCircle);
+// 1
+obj1.radiusCircle = 2.2;
+console.log(obj1.radiusCircle);
+// 2.2
+console.log(obj1.colorofCircle);
+// red
+obj1.colorofCircle = "blue";
+console.log(obj1.colorofCircle);
+// blue
+console.log(obj1.toString);
+// "Circle[radius=2.2,color=blue]"
+console.log(obj1.areaCircle);
+//  15.21
+console.log(obj1.circumferenceCircle);
+// 13.82
+-------------------------------------------------------------------------------
+// 3. Write a “person” class to hold all the details.
+
+class Person {
+  constructor(name, age, gender, city, state) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.city = city;
+    this.state = state;
+  }
+
+  getDetails() {
+    return `This is ${this.name} of age ${this.age}. I am from ${this.city}(${this.state}).`;
+  }
+}
+
+let person1 = new Person("Ramu", 35, "Male", "Cochin", "Kerala");
+console.log(person1.getDetails());
+
+// output: This is Ramu of age 35. I am from Cochin(Kerala).
+--------------------------------------------------------------------------
+// 4. write a class to calculate uber price.
+
+class Uberprice {
+  constructor(cartype, distance, triptime) {
+    this.cartype = cartype;
+    this.distance = distance;
+    this.triptime = triptime;
+  }
+
+  get rateByCar() {
+    let multiplier = {
+      uberX: 5,
+      uberXL: 7,
+      uberFLASH: 9,
+      uberECO: 3.5,
+    };
+    return multiplier[this.cartype];
+  }
+
+  getPrice() {
+    const fixedPrice = 40;
+    return fixedPrice + this.rateByCar * (this.distance + this.triptime);
+  }
+}
+
+let uber1 = new Uberprice("uberX", 10, 20);
+console.log(uber1.getPrice());
+
+// output: 190
